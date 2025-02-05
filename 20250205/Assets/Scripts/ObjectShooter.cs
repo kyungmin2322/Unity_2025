@@ -44,5 +44,10 @@ public class ObjectShooter : MonoBehaviour
         {
             Destroy(gameObject, 1.0f);
         }
+        else // 과녁인 경우 
+        {
+            objectGenerator.GetComponent<ObjectGenerator>().ScorePlus(10);
+            GetComponent<ObjectGenerator>().TargetDown();
+        }
     }
 }

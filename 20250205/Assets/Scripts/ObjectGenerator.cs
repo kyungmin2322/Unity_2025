@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class ObjectGenerator : MonoBehaviour
@@ -8,7 +9,53 @@ public class ObjectGenerator : MonoBehaviour
     // 3.   물체를 방향에 맞춰 발사하는 기능을 호출해옵니다.
 
     public GameObject prefab; // 오브젝트 프리팹 등록
-    public float power = 1000f;
+    public GameObject target; // 타겟 프리팹 등록
+    GameObject scoreText; // 점수 표시표
+    public float power = 1000f; // 투척 공격력
+    public int score = 0; // 점수
+    float accTime = 0f;
+    bool isFirst = true, isSecond = true;
+
+    void Start()
+    {
+        scoreText = GameObject.Find("score"); // 게임 씬에서 score를 찾아서 등록
+        SetScoreText(); // 최초 1회
+    }
+
+    /// <summary>
+    /// 점수 획득
+    /// </summary>
+    /// <param name="value">수치</param>
+    public void ScorePlus(int value)
+    {
+        score += value;
+        SetScoreText();
+    }
+
+    /// <summary>
+    /// 현 점수에 대한 출력
+    /// </summary>
+    void SetScoreText()
+    {
+        scoreText.GetComponent<TextMeshProUGUI>().text = $"점수 : {score}";
+    }
+
+    public void TargetDown()
+    {
+        accTime += Time.deltaTime;
+
+        if(isFirst)
+        {
+            target.transform.eulerAngles = new Vector3(90f, 0f, 0f);
+            isFirst = false;
+        }
+        else if(isSecond && accTime >= 4f)
+        {
+            target.transform.eulerAngles = new Vector3(0f, 0f, 0f);
+            isSecond = false;
+        }
+        power += 100f;
+    }
 
     void Update()
     {
