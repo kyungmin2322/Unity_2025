@@ -32,11 +32,17 @@ public class ObjectShooter : MonoBehaviour
     public void Shoot(Vector3 direction)
     {
         GetComponent<Rigidbody>().AddForce(direction);
-        Debug.Log("맞았습니다!");
+        Debug.Log("던졌습니다!");
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         GetComponent<Rigidbody>().isKinematic = true;
+        GetComponentInChildren<ParticleSystem>().Play();
+
+        if(collision.gameObject.tag == "terrain")
+        {
+            Destroy(gameObject, 1.0f);
+        }
     }
 }
