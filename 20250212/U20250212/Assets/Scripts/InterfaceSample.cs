@@ -23,27 +23,48 @@ public interface IUseAble
 
 // 인터페이스는 상속처럼 등록할 수 있다.
 // 인터페이스의 경우 다중 상속이 가능하다.
-class Potion : ICountAble, IUseAble
+class Potion : Item, ICountAble, IUseAble
 {
-    public int Count { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+    private int count;
+    private string name;
 
-    public void CountPlus()
-    {
-        throw new System.NotImplementedException();
+    public int Count 
+    { 
+        get { return count; }
+        set
+        {
+            if(count > 99)
+            {
+                Debug.Log("count는 99개가 최대입니다.");
+                count = 99;
+            }
+
+            count = value;
+        }
     }
+
+    public string Name { get => name; set => name = value; }
+
+    public void CountPlus() => Count++;
 
     public void Use()
     {
-        throw new System.NotImplementedException();
+        Debug.Log($"{Name}을 사용했습니다.");
+        Count--;
     }
 }
 
 public class InterfaceSample : MonoBehaviour
 {
+    Potion potion = new Potion();
 
     void Start()
     {
-        
+        // 완성된 클래스 사용하기
+        potion.Count = 99;
+        potion.Name = "빨간 포션";
+        potion.CountPlus();
+        potion.Use();
     }
 
     void Update()
