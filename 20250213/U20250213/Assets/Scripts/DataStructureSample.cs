@@ -16,16 +16,20 @@ public class DataStructureSample : MonoBehaviour
         stringQueue.Enqueue("도와드릴게요.");
         stringQueue.Enqueue("감사합니다.");
 
+        // 2. 첫 번째 데이터 조회
         foreach(string dialog in stringQueue)
         {
             // 큐에 저장된 가장 맨 앞의 값을 return한다.
             Debug.Log(stringQueue.Peek());
         }
-        foreach (string dialog in stringQueue)
-        {
-            // 큐에 저장된 가장 맨 앞의 값을 return한다.
-            // 추가적으로 맨 앞의 값을 제거한다.
-            Debug.Log(stringQueue.Dequeue());
-        }
+
+        // 3. 큐의 데이터 삭제
+        // 큐에 저장된 가장 맨 앞의 값을 return한다.
+        // 추가적으로 맨 앞의 값을 제거한다.
+        Debug.Log(stringQueue.Dequeue());
+        Debug.Log(stringQueue.Dequeue());
+        Debug.Log(stringQueue.Dequeue());
+        Debug.Log(stringQueue.Dequeue());
+        Debug.Log(stringQueue.Dequeue());
     }
 }
