@@ -1,16 +1,46 @@
+using System.Collections;
 using UnityEngine;
 
+// 맵에 특정 마릿수의 몬스터를 설정한 시간마다 반복해서 소환
 public class Spawner : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    
+
+    public GameObject monster_prefab;
+    public int monster_count;
+    public float monster_spawn_time;
+
+    // 해당 수치를 수정할 경우,
+    // 생성되는 영역(구)의 위치 값이 점점 넓어진다.
+    public float summon_rate = 5.0f; 
+    // 생성 위치를 기준으로 생성되는 영역(구)를 설정할 수 있다.
+    public float re_rate = 2.0f;
+
     void Start()
     {
-        
+        StartCoroutine("SpawnMonster");
     }
 
-    // Update is called once per frame
-    void Update()
+    IEnumerator SpawnMonster()
     {
-        
+        Vector3 pos; // 생성 좌표
+
+        for(int i = 0; i < monster_count; i++)
+        {
+            pos = Vector3.zero + Random.insideUnitSphere * summon_rate;
+            pos.y = 0.0f; // 생성된 유닛이 맵에 제대로 존재하기 위해 설정
+
+            // 플레이어와 근접한 범위에서 생성됐을 경우 재할당
+            while(Vector3.Distance(pos, Vector3.zero) <= re_rate)
+            {
+                pos = Vector3.zero + Random.insideUnitSphere * summon_rate;
+                pos.y = 0.0f;
+            }
+
+            GameObject go = Instantiate(monster_prefab, pos,
+                Quaternion.identity);
+        }
+        yield return new WaitForSeconds(monster_spawn_time);
+        StartCoroutine("SpawnMonster");
     }
 }
