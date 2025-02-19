@@ -1,11 +1,10 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 // 맵에 특정 마릿수의 몬스터를 설정한 시간마다 반복해서 소환
 public class Spawner : MonoBehaviour
 {
-    
-
     public GameObject monster_prefab;
     public int monster_count;
     public float monster_spawn_time;
@@ -15,6 +14,9 @@ public class Spawner : MonoBehaviour
     public float summon_rate = 5.0f; 
     // 생성 위치를 기준으로 생성되는 영역(구)를 설정할 수 있다.
     public float re_rate = 2.0f;
+
+    public static List<Monster> monster_list = new List<Monster>();
+    public static List<Player> player_list = new List<Player>();
 
     void Start()
     {
@@ -72,12 +74,13 @@ public class Spawner : MonoBehaviour
                 // result.GetComponent<Monster>().MonsterSample();
                 result.transform.position = pos;
                 result.transform.LookAt(Vector3.zero);
+                // 생성한 유닛을 몬스터 리스트에 추가
+                monster_list.Add(result.GetComponent<Monster>());
             });
             // 풀링한 값에 대한 반납
-            StartCoroutine(ReturnMonsterPooling(go));
+            // StartCoroutine(ReturnMonsterPooling(go));
         }
         
-
         yield return new WaitForSeconds(monster_spawn_time);
         StartCoroutine("SpawnMonsterPooling");
     }

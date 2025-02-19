@@ -1,17 +1,14 @@
 using System;
 using UnityEngine;
 
-[RequireComponent(typeof(Animator))]
-public class Monster : MonoBehaviour
+public class Monster : Character
 {
-    Animator animator;
-
     public float monster_speed;
     public float rate = 2.0f;
 
-    void Start()
+    protected override void Start()
     {
-        animator = GetComponent<Animator>();
+        base.Start();
     }
 
     // Action Å×½ºÆ®
@@ -41,10 +38,5 @@ public class Monster : MonoBehaviour
 
             SetMotionChange("isMOVE", true);
         }
-    }
-
-    private void SetMotionChange(string motion_name, bool param)
-    {
-        animator.SetBool(motion_name, param);
     }
 }
