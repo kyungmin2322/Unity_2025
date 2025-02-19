@@ -7,7 +7,7 @@ public class Monster : MonoBehaviour
     Animator animator;
 
     public float monster_speed;
-    public float rate = 0.5f;
+    public float rate = 2.0f;
 
     void Start()
     {

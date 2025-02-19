@@ -18,7 +18,7 @@ public class Spawner : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine("SpawnMonster");
+        StartCoroutine("SpawnMonsterPooling");
     }
 
     // 일반적인 생성 방법
@@ -65,15 +65,27 @@ public class Spawner : MonoBehaviour
             // 전달할 함수가 없는 경우(일반 생성)
             // var go = Manager.POOL.PoolObject("Monster").GetGameObject();
 
+            // 액션을 통해 기능 처리
             // 전달할 함수가 있는 경우(Action<GameObject>)
-            var go = Manager.POOL.PoolObject("Monster").GetGameObject((value) =>
+            var go = Manager.POOL.PoolObject("Monster").GetGameObject((result) =>
             {
-                value.GetComponent<Monster>().MonsterSample();
+                // result.GetComponent<Monster>().MonsterSample();
+                result.transform.position = pos;
+                result.transform.LookAt(Vector3.zero);
             });
-            
-
+            // 풀링한 값에 대한 반납
+            StartCoroutine(ReturnMonsterPooling(go));
         }
+        
+
         yield return new WaitForSeconds(monster_spawn_time);
-        StartCoroutine("SpawnMonster");
+        StartCoroutine("SpawnMonsterPooling");
+    }
+
+    // 몬스터 풀링한 값에 대한 리턴 코드
+    IEnumerator ReturnMonsterPooling(GameObject ob)
+    {
+        yield return new WaitForSeconds(1.0f);
+        Manager.POOL.pool_dict["Monster"].ObjectReturn(ob);
     }
 }

@@ -66,7 +66,7 @@ public class ObjectPool : IPool
     }
 }
 
-public class PoolManager : MonoBehaviour
+public class PoolManager
 {
     // Key : string
     // Value : IPool
@@ -79,6 +79,12 @@ public class PoolManager : MonoBehaviour
         {
             Add(path);
         }
+        // 큐가 없는 경우, 큐 추가
+        if (pool_dict[path].pool.Count <= 0)
+        {
+            AddQ(path);
+        }
+
         // 딕셔너리명[키] = 값;
         return pool_dict[path];
     }
@@ -98,5 +104,12 @@ public class PoolManager : MonoBehaviour
         object_pool.parent = obj.transform;
 
         return obj;
+    }
+
+    public void AddQ(string path)
+    {
+        var go = Manager.instance.CreateFromPath(path);
+        go.transform.parent = pool_dict[path].parent;
+        pool_dict[path].ObjectReturn(go);
     }
 }
