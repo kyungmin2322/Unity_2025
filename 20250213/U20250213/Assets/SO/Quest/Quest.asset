@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Quest
   m_EditorClassIdentifier: 
   "\uD018\uC2A4\uD2B8\uC720\uD615": 0
-  "\uBCF4\uC0C1": {fileID: 0}
-  "\uC694\uAD6C\uC870\uAC74": {fileID: 0}
-  "\uC81C\uBAA9": 
-  "\uBAA9\uD45C": 
-  "\uC124\uBA85": 
+  "\uBCF4\uC0C1": {fileID: 11400000, guid: 027d84e7d2c85fb40bec1c7673fb33c1, type: 2}
+  "\uC694\uAD6C\uC870\uAC74": {fileID: 11400000, guid: 94be3deb3e3cf484590a87580a4b5a33, type: 2}
+  "\uC81C\uBAA9": "\uB2E4\uB78C\uC950 \uC7A1\uAE30"
+  "\uBAA9\uD45C": "\uB2E4\uB78C\uC950 20\uB9C8\uB9AC\uB97C \uC7A1\uC73C\uC138\uC694."
+  "\uC124\uBA85": "\uC694\uC998 \uB2E4\uB78C\uC950\uAC00 \uB108\uBB34 \uB9CE\uC544\uC11C
+    \uB2E4\uB78C\uC950\uB97C \uC7A1\uC544\uB2EC\uB77C\uB294 \uC758\uB8B0\uB97C \uBC1B\uC558\uB2E4."
   "\uC131\uACF5": 0
   "\uC9C4\uD589\uC0C1\uD0DC": 0

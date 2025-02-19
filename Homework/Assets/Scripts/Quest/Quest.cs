@@ -21,6 +21,7 @@ public class Quest : ScriptableObject
     public Requirement 요구조건;
 
     [Header("퀘스트 정보")]
+    public int 퀘스트번호;
     public string 제목;
     public string 목표;
     [TextArea] public string 설명;
