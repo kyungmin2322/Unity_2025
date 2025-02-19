@@ -21,6 +21,7 @@ public class Spawner : MonoBehaviour
         StartCoroutine("SpawnMonster");
     }
 
+    // 일반적인 생성 방법
     IEnumerator SpawnMonster()
     {
         Vector3 pos; // 생성 좌표
@@ -39,6 +40,38 @@ public class Spawner : MonoBehaviour
 
             GameObject go = Instantiate(monster_prefab, pos,
                 Quaternion.identity);
+        }
+        yield return new WaitForSeconds(monster_spawn_time);
+        StartCoroutine("SpawnMonster");
+    }
+    
+    // 오브젝트 풀링 기법으로 만드는 방법
+    IEnumerator SpawnMonsterPooling()
+    {
+        Vector3 pos; // 생성 좌표
+
+        for (int i = 0; i < monster_count; i++)
+        {
+            pos = Vector3.zero + Random.insideUnitSphere * summon_rate;
+            pos.y = 0.0f; // 생성된 유닛이 맵에 제대로 존재하기 위해 설정
+
+            // 플레이어와 근접한 범위에서 생성됐을 경우 재할당
+            while (Vector3.Distance(pos, Vector3.zero) <= re_rate)
+            {
+                pos = Vector3.zero + Random.insideUnitSphere * summon_rate;
+                pos.y = 0.0f;
+            }
+
+            // 전달할 함수가 없는 경우(일반 생성)
+            // var go = Manager.POOL.PoolObject("Monster").GetGameObject();
+
+            // 전달할 함수가 있는 경우(Action<GameObject>)
+            var go = Manager.POOL.PoolObject("Monster").GetGameObject((value) =>
+            {
+                value.GetComponent<Monster>().MonsterSample();
+            });
+            
+
         }
         yield return new WaitForSeconds(monster_spawn_time);
         StartCoroutine("SpawnMonster");

@@ -14,6 +14,12 @@ public class Monster : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
+    // Action 테스트
+    public void MonsterSample()
+    {
+        Debug.Log("몬스터가 생성되었습니다.");
+    }
+
     void Update()
     {
         // 영점 기준으로 시선 변경
