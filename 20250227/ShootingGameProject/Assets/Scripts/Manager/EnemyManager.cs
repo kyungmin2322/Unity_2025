@@ -49,7 +49,10 @@ public class EnemyManager : MonoBehaviour
 
 				if(enemy.activeSelf == false)
 				{
-					enemy.transform.position = transform.position;
+					// ·£´ý ½ºÆù
+					int index = Random.Range(0, spawnPoints.Length);
+
+					enemy.transform.position = spawnPoints[index].position;
 					enemy.SetActive(true);
 					break;
 				}

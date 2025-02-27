@@ -8,10 +8,10 @@ public class Enemy : MonoBehaviour
 
     public GameObject explosionFactory;
     
-    private void Start()
+	// OnEnable은 유니티에서 제공해주는 활성화 단계에 호출되는 함수
+    private void OnEnable()
     {
         // 적의 방향 설정
-
         // 0 ~ 9 사이 랜덤 값 하나 가져옴
         int rand = Random.Range(0, 10);
 
