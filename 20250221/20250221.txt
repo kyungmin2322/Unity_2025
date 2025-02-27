@@ -1,0 +1,100 @@
+각도 관련 작업을 진행할 때 알아야
+하는 개념 삼각 함수
+
+Sin : 빗변과 높이의 비율
+Cos : 빗변에 대한 밑변 길이의 비율
+Tan : 밑변에 대한 높이의 비율
+
+>> 원의 반지름을 1로 정할 경우
+Cos : X축의 값
+Sin :  Y축의 값
+
+유니티의 Mathf 클래스가 제공해주는
+함수에 의해 특정 값을 계산할 수 있습니다.
+
+float x = Mathf.Cos(각도);
+float y = Mathf.Sin(각도);
+
+Vector3 v= new Vector3(x,y);
+
+
+Atan2 (아크 탄젠트 값 계산)
+아크 탄젠트 : 변의 비율을 통해 각도를 구하는 함수(역함수)
+Mathf.Atan2(y 좌표, x 좌표);
+
+지정한 y좌표와 x 좌표에 대한 각도 값을
+return 해줍니다.
+
+return 값이 라디안으로 설정이 되어있음.
+
+우리가 사용할 각도랑 단위가 다름.
+
+
+Rad2Deg를 통해 라디안 값을 각도로 변환
+
+--> 점 A로부터 점 B까지의 각을 계산
+
+
+특정 상황에 사용되는 삼각함수
+1. 특정 게임 오브젝트를 추적하기
+
+>> 추적할 좌표의 벡터를 구합니다.
+>> AddForce를 사용합니다.
+>> 전달할 값으로는 추적할 오브젝트의 position
+
+float dx = position.x - transform.position.x;
+float dy = ;
+
+float radian = Mathf.Atan2(dy,dx);
+
+float x = Mathf.Cos(radian);
+float y = Mathf.Sin(radian);
+
+Vector2 v = new Vector2(x,y);
+
+return v;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
